@@ -1,6 +1,7 @@
 ---
 layout: page
 title: 所有音乐
+permalink: /all-songs/
 ---
 
 {% assign song_by_name = site.data.songs | sort: "name" %}
