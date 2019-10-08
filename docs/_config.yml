@@ -1,6 +1,6 @@
 
 markdown:         redcarpet
-highlighter:      pygments
+highlighter:      rouge
 
 title: The Lego Songbook
 description: Dwell in the house of the Lord.
