@@ -2,7 +2,7 @@
 # Feel free to add content and custom Front Matter to this file.
 # To modify the layout, see https://jekyllrb.com/docs/themes/#overriding-theme-defaults
 
-layout: home
+layout: default
 title: Lego Songbook
 ---
 
@@ -30,24 +30,28 @@ title: Lego Songbook
 
 ### 按调式
 
-{% assign songs_by_key = site.data.songs | sort: "key" %}
-{% for song in songs_by_key %}
+[回到目录](#目录)
+
+{% assign all_keys = "C, C#, D, Eb, E, F, F#, G, Ab, A, Bb, B" | split: ", " %}
+{%- for key in all_keys -%}
+    {%- assign song_in_key = site.data.songs | where: "key", key -%}
+    {%- if song_in_key.size != 0 -%}
+        [{{ key }}](${{ key }}) -
+    {% endif -%}
+{%- endfor -%}
+
+{% for key in all_keys %}
+{% assign song_in_key = site.data.songs | where: "key", key %}
+{% if song_in_key.size != 0 %}
+
+#### {{ key}}
+
+{% for song in song_in_key %}
 {{ song.name }} {{ song.key }} [{{ song.sheet_type }}]({{ song.sheet_link }})
 {% endfor %}
 
-[回到目录](#目录)
-
-[C](#C) - [C#](#C#) - [D](#D) - [Eb](#Eb) - [E](#E) - [F](#F)
-
-#### C
-
-#### C#
-
-#### D
-
-#### Eb
-
-#### E
+{% endif %}
+{% endfor %}
 
 
 ### 按唱的频率
@@ -63,16 +67,29 @@ title: Lego Songbook
 [回到目录](#目录)
 
 {% for service in site.data.past_services %}
+
 #### {{ service.date }}
 
-+ 带领人: {{ service.lead_singer }}{% if service.vocals %}
-+ 伴唱: {{ service.vocals }}{% endif %}{% if service.instrumentation %}
-+ 配乐:{% for instrument in service.instrumentation %}
-    - {{ instrument.instrument }}: {{ instrument.player }}{% endfor %}{% endif %}
-+ 曲目:{% for song in service.songs %}{% assign this_song = site.data.songs | where: "name", song %}
-    - {% if this_song.first %}[{{ song }}]({{ this_song.first.sheet_link }}){% else %}{{ song }}{% endif %}{% endfor %}
-
-{% endfor %}
++ 带领人: {{ service.lead_singer }}
+{%- if service.vocals %}
++ 伴唱: {{ service.vocals }}
+{%- endif %}
+{%- if service.instrumentation %}
++ 乐器:
+{%- for instrument in service.instrumentation %}
+    - {{ instrument.instrument }}: {{ instrument.player }}
+{%- endfor -%}
+{%- endif %}
++ 曲目:
+{%- for song in service.songs -%}
+{%- assign this_song = site.data.songs | where: "name", song -%}
+{%- if this_song.first %}
+    - [{{ song }}]({{ this_song.first.sheet_link }})
+{%- else %}
+    - {{ song }}
+{%- endif -%}
+{%- endfor -%}
+{%- endfor %}
 
 ### 特殊活动
 
