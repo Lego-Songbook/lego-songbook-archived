@@ -1,0 +1,15 @@
+[tool.poetry]
+name = "lego-songbook"
+version = "0.1.0"
+description = "The Songbook for our beloved Lego small group."
+authors = ["Kip Yin <28321392+kipyin@users.noreply.github.com>"]
+license = "MIT"
+
+[tool.poetry.dependencies]
+python = "^3.6"
+
+[tool.poetry.dev-dependencies]
+
+[build-system]
+requires = ["poetry>=0.12"]
+build-backend = "poetry.masonry.api"
