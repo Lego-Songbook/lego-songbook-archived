@@ -7,5 +7,5 @@ title: 所有音乐
 | Name | Key | Sheet |
 |:---:|:---:|:---:|
 {% for song in song_by_name -%}
-| {{ song.name }} | {{ song.key }} | [{{ song.sheet_type }}]( {{ song.sheet_link }}) |
+| {{ song.name }} | {{ song.key }} | [{{ song.sheet_type }}]({{ song.sheet_link }}) |
 {% endfor %}
