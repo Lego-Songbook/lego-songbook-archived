@@ -3,7 +3,9 @@
 # To modify the layout, see https://jekyllrb.com/docs/themes/#overriding-theme-defaults
 
 layout: home
+title: Lego Songbook
 ---
+
 ## 目录
 
 + [所有音乐](#所有音乐)
@@ -21,7 +23,17 @@ layout: home
 
 [回到目录](#目录)
 
+{% assign songs_by_name = site.data.songs | sort: "name" %}
+{% for song in songs_by_name %}
+{{ song.name }} {{ song.key }} [{{ song.sheet_type }}]({{ song.sheet_link }})
+{% endfor %}
+
 ### 按调式
+
+{% assign songs_by_key = site.data.songs | sort: "key" %}
+{% for song in songs_by_key %}
+{{ song.name }} {{ song.key }} [{{ song.sheet_type }}]({{ song.sheet_link }})
+{% endfor %}
 
 [回到目录](#目录)
 
@@ -50,7 +62,17 @@ layout: home
 
 [回到目录](#目录)
 
-#### 2019年10月6日
+{% for service in site.data.past_services %}
+#### {{ service.date }}
+
++ 带领人: {{ service.lead_singer }}{% if service.vocals %}
++ 伴唱: {{ service.vocals }}{% endif %}{% if service.instrumentation %}
++ 配乐:{% for instrument in service.instrumentation %}
+    - {{ instrument.instrument }}: {{ instrument.player }}{% endfor %}{% endif %}
++ 曲目:{% for song in service.songs %}{% assign this_song = site.data.songs | where: "name", song %}
+    - {% if this_song[0] %}[{{ song }}]({{ this_song[0].sheet_link }}){% else %}{{ song }}{% endif %}{% endfor %}
+
+{% endfor %}
 
 ### 特殊活动
 

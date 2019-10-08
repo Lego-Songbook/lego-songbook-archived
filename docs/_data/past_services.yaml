@@ -1,0 +1,21 @@
+- date: 2019-10-6
+  lead_singer: 颐天
+  vocals: null
+  instrumentation:
+      - instrument: 键盘
+        player: 翔哥
+  songs:
+      - 满有能力
+      - 宝贵十架
+      - 谁能使我与神的爱隔绝
+
+- date: 2019-9-22
+  lead_singer: 小凯
+  vocals: 淼姐
+  instrumentation:
+      - instrument: 键盘
+        player: 颐天
+  songs:
+      - 赞美中遇见你
+      - 彩虹下的约定
+      - 一生敬拜你
