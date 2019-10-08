@@ -70,7 +70,7 @@ title: Lego Songbook
 + 配乐:{% for instrument in service.instrumentation %}
     - {{ instrument.instrument }}: {{ instrument.player }}{% endfor %}{% endif %}
 + 曲目:{% for song in service.songs %}{% assign this_song = site.data.songs | where: "name", song %}
-    - {% if this_song[0] %}[{{ song }}]({{ this_song[0].sheet_link }}){% else %}{{ song }}{% endif %}{% endfor %}
+    - {% if this_song.first %}[{{ song }}]({{ this_song.first.sheet_link }}){% else %}{{ song }}{% endif %}{% endfor %}
 
 {% endfor %}
 
