@@ -11,7 +11,7 @@ permalink: /past-services/
 
 {% for service in site.data.past_services %}
 
-#### {{ service.date }}
+#### [{{ service.date }}]({{ site.baseurl }}/past-services/{{ service.date }}.html)
 
 + 带领：{{ service.lead_singer }}
 {%- if service.vocals %}
