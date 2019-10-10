@@ -26,8 +26,11 @@ permalink: /past-services/
 + 曲目：
 {%- for song in service.songs -%}
 {%- assign this_song = site.data.songs | where: "name", song -%}
-{%- if this_song.first %}
-    - [{{ song }}]({{ this_song.first.sheet_link }})
+{%- if this_song.first.sheet_type %}
+    {%- capture sheet_link -%}
+        http://pz2c5nkyy.bkt.clouddn.com/{{ song.key | url_encode}}-{{ song.name | url_encode | replace: "+", "%20" }}-{{ song.sheet_type | url_encode }}.jpg
+    {%- endcapture -%}
+    - [{{ song }}]({{ sheet_link }})
 {%- else %}
     - {{ song }}
 {%- endif -%}
