@@ -4,7 +4,7 @@ title: 所有音乐
 permalink: /all-songs/
 ---
 
-{% assign song_by_name = site.data.songs | sort: "key" %}
+{% assign song_by_name = site.data.songs | sort: "name" %}
 | Name | Key | Sheet | 圣诗精选 |
 |:---:|:---:|:---:|:---:|
 {% for song in song_by_name -%}
