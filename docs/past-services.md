@@ -28,7 +28,7 @@ permalink: /past-services/
 {%- assign this_song = site.data.songs | where: "name", song -%}
 {%- if this_song.first.sheet_type -%}
     {%- capture sheet_link -%}
-        http://pz2c5nkyy.bkt.clouddn.com/{{ song.key | url_encode}}-{{ song.name | url_encode | replace: "+", "%20" }}-{{ song.sheet_type | url_encode }}.jpg
+        http://pz2c5nkyy.bkt.clouddn.com/{{ this_song.first.key | url_encode}}-{{ this_song.first.name | url_encode | replace: "+", "%20" }}-{{ this_song.first.sheet_type | url_encode }}.jpg
     {%- endcapture %}
     - [{{ song }}]({{ sheet_link }})
 {%- else %}
