@@ -9,7 +9,9 @@ permalink: /past-services/
 
 ### 主日敬拜
 
-{% for service in site.data.past_services %}
+{%- assign past_services = site.data.past_services | sort: "date" | reverse -%}
+
+{% for service in past_services %}
 
 #### [{{ service.date }}]({{ site.baseurl }}/past-services/{{ service.date }}.html)
 
