@@ -1,6 +1,7 @@
 from datetime import date
 from typing import Sequence, Tuple, Mapping
 
+import click
 from peewee import (
     CharField,
     DateField,
@@ -80,7 +81,7 @@ def add_songs(songs: Sequence[Tuple[str, str, int]]) -> bool:
                 conflict_target=[Song.name],
                 preserve=[Song.key, Song.hymn_ref],
             ).execute()
-# 
+#
 #
 # def add_arrangements(arrangements: Mapping[str, str]) -> bool:
 #     """Add an arrangement into the database.
@@ -111,3 +112,38 @@ def add_worship(
 
     worship.songs.add(Song.select().where(Song.name.in_(songs)))
     worship.arrangements.add(arrangement_list)
+
+
+@click.group()
+def cli():
+    initialize("songbook.db")
+
+
+@cli.command()
+@click.option("--table", prompt="Table name", help="the name of the table to show.")
+@click.option("--first", default=10, help="show the first x entries of a table.")
+def show(table, first):
+    """Show the first x entries of the given table."""
+    # initialize("songbook.db")
+    results = db.execute_sql(f"SELECT * FROM {table} LIMIT {first}")
+    for result in results:
+        print(result)
+#
+#
+# @cli.command()
+# @cli.group()
+# def add():
+#     pass
+
+
+@cli.command()
+@click.option("--name", prompt="Name")
+@click.option("--key", prompt="Key")
+@click.option("--hymn", prompt="Hymn Ref")
+def song(name, key, hymn):
+    add_songs([(name, key, hymn)])
+    print(f"{name} is added.")
+
+
+if __name__ == "__main__":
+    cli()
