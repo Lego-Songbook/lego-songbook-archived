@@ -1,5 +1,5 @@
 from datetime import date
-from typing import Sequence, Tuple, Mapping
+from typing import Mapping, Sequence, Tuple
 
 import click
 from peewee import (
@@ -7,8 +7,8 @@ from peewee import (
     DateField,
     IntegerField,
     ManyToManyField,
-    SqliteDatabase,
     Model,
+    SqliteDatabase
 )
 
 db = SqliteDatabase(None)
@@ -76,11 +76,13 @@ def add_songs(songs: Sequence[Tuple[str, str, int]]) -> bool:
     """Bulk insert songs into the database."""
 
     with db.atomic():
-        Song.insert_many(songs, fields=[Song.name, Song.key, Song.hymn_ref]
-            ).on_conflict(
-                conflict_target=[Song.name],
-                preserve=[Song.key, Song.hymn_ref],
-            ).execute()
+        Song.insert_many(
+            songs, fields=[Song.name, Song.key, Song.hymn_ref]
+        ).on_conflict(
+            conflict_target=[Song.name], preserve=[Song.key, Song.hymn_ref]
+        ).execute()
+
+
 #
 #
 # def add_arrangements(arrangements: Mapping[str, str]) -> bool:
@@ -128,6 +130,8 @@ def show(table, first):
     results = db.execute_sql(f"SELECT * FROM {table} LIMIT {first}")
     for result in results:
         print(result)
+
+
 #
 #
 # @cli.command()

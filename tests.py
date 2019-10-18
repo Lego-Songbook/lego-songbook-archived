@@ -6,14 +6,16 @@ import pytest
 import sing
 
 TEST_SONGS = [("Song A", "C", 335), ("Song B", "C#", 253), ("Song C", "Bb", 5)]
-TEST_ARRANGEMENTS = OrderedDict([
-    ("Keyboard", "Adam"),
-    ("Bass", "Bella"),
-    ("Guitar", "Eliot"),
-    ("Drums", "Fiona"),
-    ("Leader", "Adam"),
-    ("Guitar", "Fiona"),
-])
+TEST_ARRANGEMENTS = OrderedDict(
+    [
+        ("Keyboard", "Adam"),
+        ("Bass", "Bella"),
+        ("Guitar", "Eliot"),
+        ("Drums", "Fiona"),
+        ("Leader", "Adam"),
+        ("Guitar", "Fiona"),
+    ]
+)
 
 
 def test_db_init():
@@ -37,6 +39,8 @@ def test_add_conflicting_songs():
     assert song.key == "Eb"
     assert song.hymn_ref == 355
     assert song.id == 1
+
+
 #
 #
 # def test_add_arrangements():
