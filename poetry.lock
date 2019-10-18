@@ -96,6 +96,14 @@ version = "1.0.1"
 
 [[package]]
 category = "dev"
+description = "A platform independent file lock."
+name = "filelock"
+optional = false
+python-versions = "*"
+version = "3.0.12"
+
+[[package]]
+category = "dev"
 description = "Read metadata from Python packages"
 marker = "python_version < \"3.8\""
 name = "importlib-metadata"
@@ -336,6 +344,43 @@ version = "0.10.0"
 
 [[package]]
 category = "dev"
+description = "tox is a generic virtualenv management and test command line tool"
+name = "tox"
+optional = false
+python-versions = ">=2.7, !=3.0.*, !=3.1.*, !=3.2.*, !=3.3.*"
+version = "3.14.0"
+
+[package.dependencies]
+filelock = ">=3.0.0,<4"
+packaging = ">=14"
+pluggy = ">=0.12.0,<1"
+py = ">=1.4.17,<2"
+six = ">=1.0.0,<2"
+toml = ">=0.9.4"
+virtualenv = ">=14.0.0"
+
+[package.dependencies.importlib-metadata]
+python = "<3.8"
+version = ">=0.12,<1"
+
+[package.extras]
+docs = ["sphinx (>=2.0.0,<3)", "towncrier (>=18.5.0)", "pygments-github-lexers (>=0.0.5)", "sphinxcontrib-autoprogram (>=0.1.5)"]
+testing = ["freezegun (>=0.3.11,<1)", "pathlib2 (>=2.3.3,<3)", "pytest (>=4.0.0,<6)", "pytest-cov (>=2.5.1,<3)", "pytest-mock (>=1.10.0,<2)", "pytest-xdist (>=1.22.2,<2)", "pytest-randomly (>=1.2.3,<2)", "flaky (>=3.4.0,<4)", "psutil (>=5.6.1,<6)"]
+
+[[package]]
+category = "dev"
+description = "Virtual Python Environment builder"
+name = "virtualenv"
+optional = false
+python-versions = "!=3.0.*,!=3.1.*,!=3.2.*,!=3.3.*,>=2.7"
+version = "16.7.6"
+
+[package.extras]
+docs = ["sphinx (>=1.8.0,<2)", "towncrier (>=18.5.0)", "sphinx-rtd-theme (>=0.4.2,<1)"]
+testing = ["pytest (>=4.0.0,<5)", "coverage (>=4.5.0,<5)", "pytest-timeout (>=1.3.0,<2)", "six (>=1.10.0,<2)", "pytest-xdist", "pytest-localserver", "pypiserver", "mock", "xonsh"]
+
+[[package]]
+category = "dev"
 description = "Measures number of Terminal column cells of wide-character codes"
 name = "wcwidth"
 optional = false
@@ -375,7 +420,7 @@ docs = ["sphinx", "jaraco.packaging (>=3.2)", "rst.linker (>=1.9)"]
 testing = ["pathlib2", "contextlib2", "unittest2"]
 
 [metadata]
-content-hash = "f81646fa1fcfa6e227d43c7a586a4a55dfd4df1a2f58032de17868fc0ce2e85b"
+content-hash = "d4e206f48232df7074550f8a1b0f07ff416443e521c400587b042c474a5dd9ff"
 python-versions = "^3.6"
 
 [metadata.hashes]
@@ -389,6 +434,7 @@ colorama = ["05eed71e2e327246ad6b38c540c4a3117230b19679b875190486ddd2d721422d", 
 defusedxml = ["6687150770438374ab581bb7a1b327a847dd9c5749e396102de3fad4e8a3ef93", "f684034d135af4c6cbb949b8a4d2ed61634515257a67299e5f940fbaa34377f5"]
 docopt = ["49b3a825280bd66b3aa83585ef59c4a8c82f2c8a522dbe754a8bc8d08c85c491"]
 et-xmlfile = ["614d9722d572f6246302c4491846d2c393c199cfa4edc9af593437691683335b"]
+filelock = ["18d82244ee114f543149c66a6e0c14e9c4f8a1044b5cdaadd0f82159d6a6ff59", "929b7d63ec5b7d6b71b0fa5ac14e030b3f70b75747cef1b10da9b879fef15836"]
 importlib-metadata = ["aa18d7378b00b40847790e7c27e11673d7fed219354109d0e7b9e5b25dc3ad26", "d5f18a79777f3aa179c145737780282e27b508fc8fd688cb17c7a813e8bd39af"]
 invoke = ["c52274d2e8a6d64ef0d61093e1983268ea1fc0cd13facb9448c4ef0c9a7ac7da", "f4ec8a134c0122ea042c8912529f87652445d9f4de590b353d23f95bfa1f0efd", "fc803a5c9052f15e63310aa81a43498d7c55542beb18564db88a9d75a176fa44"]
 isort = ["54da7e92468955c4fceacd0c86bd0ec997b0e1ee80d97f67c35a78b719dccab1", "6e811fcb295968434526407adb8796944f1988c5b65e8139058f2014cbe100fd"]
@@ -408,6 +454,8 @@ six = ["3350809f0555b11f552448330d0b52d5f24c91a322ea4a15ef22629740f3761c", "d16a
 sqlalchemy = ["0f0768b5db594517e1f5e1572c73d14cf295140756431270d89496dc13d5e46c"]
 tablib = ["0f88a9cebdaa1a2cc29ae57387082ee81015d1149ecd34e48a8c8d3b4dd21670", "5f33c079b07eb10cf9c4b4696add2ecf32c89db7729240546ecdcd5c92f67e13"]
 toml = ["229f81c57791a41d65e399fc06bf0848bab550a9dfd5ed66df18ce5f05e73d5c", "235682dd292d5899d361a811df37e04a8828a5b1da3115886b73cf81ebc9100e", "f1db651f9657708513243e61e6cc67d101a39bad662eaa9b5546f789338e07a3"]
+tox = ["0bc216b6a2e6afe764476b4a07edf2c1dab99ed82bb146a1130b2e828f5bff5e", "c4f6b319c20ba4913dbfe71ebfd14ff95d1853c4231493608182f66e566ecfe1"]
+virtualenv = ["3e3597e89c73df9313f5566e8fc582bd7037938d15b05329c232ec57a11a7ad5", "5d370508bf32e522d79096e8cbea3499d47e624ac7e11e9089f9397a0b3318df"]
 wcwidth = ["3df37372226d6e63e1b1e1eda15c594bca98a22d33a23832a90998faa96bc65e", "f4ebe71925af7b40a864553f761ed559b43544f8f71746c2d756c7fe788ade7c"]
 xlrd = ["546eb36cee8db40c3eaa46c351e67ffee6eeb5fa2650b71bc4c758a29a1b29b2", "e551fb498759fa3a5384a94ccd4c3c02eb7c00ea424426e212ac0c57be9dfbde"]
 xlwt = ["a082260524678ba48a297d922cc385f58278b8aa68741596a87de01a9c628b2e", "c59912717a9b28f1a3c2a98fd60741014b06b043936dcecbc113eaaada156c88"]
