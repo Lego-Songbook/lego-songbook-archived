@@ -31,3 +31,25 @@
       - 我心切切渴慕你
       - 倾听我的心
       - 全然向你
+
+- date: 2019-10-20
+  lead_singer: 恩沐
+  instrumentation:
+      - instrument: 吉他
+        player: 载恩
+  songs:
+      - 满有能力
+      - 委身之歌
+      - 中国的早晨五点钟
+
+- date: 2019-10-27
+  lead_singer: 小凯
+  instrumentation:
+      - instrument: 键盘
+        player: 淼姐
+      - instrument: 鼓
+        player: 颐天
+  songs:
+      - 单单敬拜
+      - 深深爱你
+      - 委身之歌

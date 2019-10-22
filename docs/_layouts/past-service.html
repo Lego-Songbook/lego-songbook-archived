@@ -5,7 +5,8 @@ layout: default
 <div class="page">
   <h1 class="page-title">{{ page.title }}</h1>
 
-  {%- assign services = site.data.past_services | where: "date", page.title -%}
+  {%- assign service_date = page.title | slice: 0, 10 -%}
+  {%- assign services = site.data.past_services | where: "date", service_date -%}
   {%- assign service = services.first -%}
   <ul>
   <li> 带领：{{ service.lead_singer }}</li>
