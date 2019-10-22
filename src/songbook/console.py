@@ -14,7 +14,6 @@ def main():
 @click.option("--first", default=10, help="show the first x entries of a table.")
 def show(table, first):
     """Show the first x entries of the given table."""
-    # initialize("songbook.db")
     results = db.execute_sql(f"SELECT * FROM {table} LIMIT {first}")
     for result in results:
         print(result)
