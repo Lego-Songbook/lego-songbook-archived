@@ -1,7 +1,33 @@
+"""
+database.py
+
+This module handles database transactions, and performs CRUD operations.
+
+The Plan:
+
+>>> songbook = SongBook(db_uri='songbook.db')  # db is initialized and connected
+>>> songbook.add('song', **kwargs)  # factory method
+>>> songbook.view('song', **kwargs)  # also factory, where-clause can be passed as kwargs
+>>> # Conveniently,
+>>> songbook.songs  # @property, shorthand of songbook.view('song')
+>>> songbook.remove('worship', date=date(2019, 10, 12))  # factory
+>>> songbook.update('song', **kwargs)
+>>> songbook.import(file='songs.csv', table='song', on_conflict='update')
+
+"""
+
 from datetime import date
 from typing import Mapping, Sequence, Tuple
 
-from .models import Arrangement, Song, Worship, db, WorshipSong, WorshipArrangement
+from .models import (
+    Arrangement,
+    Song,
+    Worship,
+    WorshipArrangement,
+    WorshipSong,
+    db,
+    initialize
+)
 
 
 def initialize(db_uri: str):
