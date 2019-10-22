@@ -1,6 +1,6 @@
-
+---
 # markdown:         redcarpet
-highlighter:      rouge
+highlighter: rouge
 
 title: The Lego Songbook
 description: Dwell in the house of the Lord.
@@ -11,8 +11,8 @@ description: Dwell in the house of the Lord.
 #   all the days of my life,<br />
 #   to gaze on the beauty of the Lord<br />
 #   and to seek him in his temple.
-baseurl: /lego-songbook # the subpath of your site, e.g. /blog
-url: https://kipyin.github.io/ # the base hostname & protocol for your site, e.g. http://example.com
+baseurl: /lego-songbook  # the subpath of your site, e.g. /blog
+url: https://kipyin.github.io/  # the base hostname & protocol for your site
 
 # permalink: pretty
 # relative_permalinks: true
