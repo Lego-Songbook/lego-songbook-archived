@@ -16,6 +16,9 @@ def serve(c):
 
 @task(help={"version": "Version of the next release."})
 def release(c, version, site_config_path="docs/_config.yml"):
+    """Automatically create a release branch, bump the version, and
+    finish the release.
+    """
     c.run(f"git flow release start {version}")
     c.run(f"poetry version {version}")
 
@@ -30,4 +33,4 @@ def release(c, version, site_config_path="docs/_config.yml"):
     c.run("poetry run tox -q")
 
     c.run(f"git commit -a -m 'Bump version to {version}'")
-    c.run(f"git flow release finish {version}")
+    c.run(f"git flow release finish {version} -m 'v{version}'")
