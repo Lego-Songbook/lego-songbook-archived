@@ -1,3 +1,4 @@
+import os
 from datetime import date
 
 from peewee import (
@@ -25,6 +26,18 @@ class Song(BaseModel):
 
     def __repr__(self):
         return f"Song(id={self.id}, name={self.name}, key={self.key}, hymn_ref={self.hymn_ref})"
+
+    # @classmethod
+    # def add(cls, name, key, hymn_ref=None) -> cls:
+    #     return cls.create(name=name, key=key, hymn_ref=hymn_ref)
+
+    @classmethod
+    def load(cls, path: str, format: tuple, delimiter: str = "-"):
+        """Bulk insert songs by analyzing the sheet names under `path`."""
+        sheet_names = [x.name for x in os.scandir(path)]
+        sheet_name_components = [x.split(delimiter) for x in sheet_names]
+
+
 
 
 class Arrangement(BaseModel):
