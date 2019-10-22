@@ -26,7 +26,7 @@ from .models import (
     WorshipArrangement,
     WorshipSong,
     db,
-    initialize
+    initialize,
 )
 
 
@@ -59,7 +59,3 @@ def add_worship(
 
     worship.songs.add(Song.select().where(Song.name.in_(songs)))
     worship.arrangements.add(arrangement_list)
-
-
-def import_songs_by_sheet_names():
-    """Bulk import songs by sheet names."""
