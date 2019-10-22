@@ -3,8 +3,7 @@ from datetime import date
 
 import pytest
 
-from songbook import models
-from songbook import database
+from songbook import database, models
 
 TEST_SONGS = [("Song A", "C", None), ("Song B", "C#", 253), ("Song C", "Bb", 5)]
 TEST_ARRANGEMENTS = OrderedDict(
