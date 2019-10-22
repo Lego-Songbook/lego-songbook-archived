@@ -26,7 +26,7 @@ def release(c, version, site_config_path="docs/_config.yml"):
 
     c.run("poetry lock")
 
-    c.run("Testing the package...")
+    print("Testing the package...")
     c.run("poetry run tox -q")
 
     c.run(f"git commit -a -m 'Bump version to {version}'")
