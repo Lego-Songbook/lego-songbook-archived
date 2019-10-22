@@ -4,7 +4,8 @@ from typing import Mapping, Sequence, Tuple
 from .models import Arrangement, Song, Worship, db, WorshipSong, WorshipArrangement
 
 
-def initialize(db_uri):
+def initialize(db_uri: str):
+    """Initialize the database with `db_uri`."""
     db.init(db_uri)
     db.create_tables([Song, Arrangement, Worship, WorshipSong, WorshipArrangement])
 
@@ -32,3 +33,7 @@ def add_worship(
 
     worship.songs.add(Song.select().where(Song.name.in_(songs)))
     worship.arrangements.add(arrangement_list)
+
+
+def import_songs_by_sheet_names():
+    """Bulk import songs by sheet names."""
