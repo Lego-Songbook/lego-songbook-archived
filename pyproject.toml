@@ -13,6 +13,7 @@ python = "^3.6"
 records = "^0.5.3"
 peewee = "^3.11.2"
 click = "^7.0"
+attrs = "^19.3.0"
 
 [tool.poetry.dev-dependencies]
 pytest = "^5.2.1"

@@ -15,7 +15,7 @@ python-versions = ">=2.7, !=3.0.*, !=3.1.*, !=3.2.*, !=3.3.*"
 version = "1.3.0"
 
 [[package]]
-category = "dev"
+category = "main"
 description = "Classes Without Boilerplate"
 name = "attrs"
 optional = false
@@ -420,7 +420,7 @@ docs = ["sphinx", "jaraco.packaging (>=3.2)", "rst.linker (>=1.9)"]
 testing = ["pathlib2", "contextlib2", "unittest2"]
 
 [metadata]
-content-hash = "d4e206f48232df7074550f8a1b0f07ff416443e521c400587b042c474a5dd9ff"
+content-hash = "3d80200ddaf096c1dfd9042ff380d7344273def2b872b75f7370c927447d01da"
 python-versions = "^3.6"
 
 [metadata.hashes]
