@@ -49,3 +49,9 @@ class Worship(_BaseModel):
 
 WorshipSong = Worship.songs.get_through_model()
 WorshipArrangement = Worship.arrangements.get_through_model()
+
+
+def initialize(db_uri: str):
+    """Initialize the database with `db_uri`."""
+    db.init(db_uri)
+    db.create_tables([Song, Arrangement, Worship, WorshipSong, WorshipArrangement])
