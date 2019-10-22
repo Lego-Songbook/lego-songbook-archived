@@ -21,6 +21,7 @@ black = "^19.3b0"
 isort = "^4.3.21"
 invoke = "^1.3.0"
 tox = "^3.14.0"
+yamllint = "^1.18.0"
 
 [tool.poetry.scripts]
 songbook = "src.songbook.console:main"
