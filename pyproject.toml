@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "lego-songbook"
-version = "19.10.1"
+version = "19.10.2dev1"
 description = "The Songbook for our beloved Lego small group."
 authors = ["Kip Yin <28321392+kipyin@users.noreply.github.com>"]
 license = "MIT"
@@ -21,6 +21,8 @@ black = "^19.3b0"
 isort = "^4.3.21"
 invoke = "^1.3.0"
 tox = "^3.14.0"
+yamllint = "^1.18.0"
+pyyaml = "^5.1.2"
 
 [tool.poetry.scripts]
 songbook = "src.songbook.console:main"

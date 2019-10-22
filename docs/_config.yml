@@ -1,45 +1,8 @@
-
-# markdown:         redcarpet
-highlighter:      rouge
-
-title: The Lego Songbook
+baseurl: /lego-songbook
 description: Dwell in the house of the Lord.
-# description: |
-#   One thing I ask from the Lord,<br />
-#   this only do I seek:<br /
-#   that I may dwell in the house of the Lord<br />
-#   all the days of my life,<br />
-#   to gaze on the beauty of the Lord<br />
-#   and to seek him in his temple.
-baseurl: /lego-songbook # the subpath of your site, e.g. /blog
-url: https://kipyin.github.io/ # the base hostname & protocol for your site, e.g. http://example.com
-
-# permalink: pretty
-# relative_permalinks: true
-
-# Build settings
-# theme: jekyll-theme-cayman
+highlighter: rouge
 plugins:
-  - jekyll-feed
-
-version: 19.10.1
-
-# Exclude from processing.
-# The following items will not be processed, by default.
-# Any item listed under the `exclude:` key here will be automatically added to
-# the internal "default list".
-#
-# Excluded items can be processed by explicitly listing the directories or
-# their entries' file path in the `include:` list.
-#
-# exclude:
-#   - .sass-cache/
-#   - .jekyll-cache/
-#   - gemfiles/
-#   - Gemfile
-#   - Gemfile.lock
-#   - node_modules/
-#   - vendor/bundle/
-#   - vendor/cache/
-#   - vendor/gems/
-#   - vendor/ruby/
+- jekyll-feed
+title: The Lego Songbook
+url: https://kipyin.github.io/
+version: 19.10.2dev1
