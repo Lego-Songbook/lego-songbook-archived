@@ -14,6 +14,15 @@ def serve(c):
     c.run("bundle exec jekyll serve")
 
 
+@task
+def feature(c, name):
+    """Start a new feature."""
+    if c.run(f"git branch | grep feature/{name}", hide=True):
+        c.run(f"git flow feature finish {name}")
+    else:
+        c.run(f"git flow feature start {name}")
+
+
 @task(help={"version": "Version of the next release."})
 def release(c, version, site_config_path="docs/_config.yml"):
     """Automatically create a release branch, bump the version, and
