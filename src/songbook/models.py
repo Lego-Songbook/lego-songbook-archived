@@ -7,15 +7,17 @@ from peewee import (
     IntegerField,
     ManyToManyField,
     Model,
-    SqliteDatabase
+    SqliteDatabase,
 )
 
-db = SqliteDatabase(None)
+__all__ = ("Song", "Arrangement", "Worship", "init")
+
+_db = SqliteDatabase(None)
 
 
 class _BaseModel(Model):
     class Meta:
-        database = db
+        database = _db
 
 
 class Song(_BaseModel):
@@ -51,7 +53,7 @@ WorshipSong = Worship.songs.get_through_model()
 WorshipArrangement = Worship.arrangements.get_through_model()
 
 
-def initialize(db_uri: str):
+def init(db_uri: str):
     """Initialize the database with `db_uri`."""
-    db.init(db_uri)
-    db.create_tables([Song, Arrangement, Worship, WorshipSong, WorshipArrangement])
+    _db.init(db_uri)
+    _db.create_tables([Song, Arrangement, Worship, WorshipSong, WorshipArrangement])
