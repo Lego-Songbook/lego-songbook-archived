@@ -1,4 +1,3 @@
-import yaml
 from invoke import task
 
 
@@ -28,18 +27,24 @@ def release(c, version, site_config_path="docs/_config.yml"):
     """Automatically create a release branch, bump the version, and
     finish the release.
     """
-    c.run(f"git flow release start {version}")
-    c.run(f"poetry version {version}")
+    if c.run(f"git branch | grep release/{version}", hide=True).failed:
 
-    site_config = yaml.safe_load(open(site_config_path, "r"))
-    site_config["version"] = version
-    yaml.dump(site_config, open(site_config_path, "w"))
-    print(f"The site is bumped to {version}.")
+        from yaml import safe_load, dump
 
-    c.run("poetry lock")
+        c.run(f"git flow release start {version}")
+        c.run(f"poetry version {version}")
 
-    print("Testing the package...")
-    c.run("poetry run tox -q")
+        site_config = safe_load(open(site_config_path, "r"))
+        site_config["version"] = version
+        dump(site_config, open(site_config_path, "w"))
+        print(f"The site is bumped to {version}.")
 
-    c.run(f"git commit -a -m 'Bump version to {version}'")
+        c.run("poetry lock")
+
+        print("Testing the package...")
+        c.run("poetry run tox -q")
+
+    if c.run("git status", hide=True).failed:
+        c.run(f"git commit -a -m 'Bump version to {version}'")
+
     c.run(f"git flow release finish {version} -m 'v{version}'")
