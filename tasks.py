@@ -10,4 +10,4 @@ def format(c):
 @task
 def serve(c):
     c.run("cd docs")
-    c.run("bundle run jekyll serve")
+    c.run("bundle exec jekyll serve")
