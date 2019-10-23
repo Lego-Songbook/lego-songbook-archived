@@ -3,20 +3,22 @@ from invoke import task
 
 @task
 def format(c):
+    """Sort the imports and do the black magic."""
     c.run("poetry run isort -rc .")
     c.run("poetry run black .")
 
 
 @task
 def serve(c):
+    """Start the local site server."""
     c.run("cd docs", hide=True)
     c.run("bundle exec jekyll serve")
 
 
-@task
+@task(help={"name": "The feature's name."})
 def feature(c, name):
     """Start a new feature."""
-    if c.run(f"git branch | grep feature/{name}", hide=True):
+    if c.run(f"git branch | grep feature/{name}", warn=True).ok:
         c.run(f"git flow feature finish {name}")
     else:
         c.run(f"git flow feature start {name}")
@@ -24,10 +26,8 @@ def feature(c, name):
 
 @task(help={"version": "Version of the next release."})
 def release(c, version, site_config_path="docs/_config.yml"):
-    """Automatically create a release branch, bump the version, and
-    finish the release.
-    """
-    if c.run(f"git branch | grep release/{version}", hide=True).failed:
+    """Make a new release automatically."""
+    if c.run(f"git branch | grep release/{version}", warn=True).failed:
 
         from yaml import safe_load, dump
 
