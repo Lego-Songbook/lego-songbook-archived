@@ -60,17 +60,18 @@ def _import_worships():
 
 
 @main.command()
-@click.option("-t", "--table")
+@click.argument("table")
 @click.option("-f", "--format")
 @click.option("-i", "--input", "input_")
 def import_(table, format, input_):
     if table == "songs":
-        _import_songs()
+        _import_songs(format)
     elif table == "arrangements":
         _import_arrangements()
     elif table == "worships":
         _import_worships()
-    pass
+    else:
+        raise ValueError(f"Invalid table name {table}.")
 
 
 @main.command()
