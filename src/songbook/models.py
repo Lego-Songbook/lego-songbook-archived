@@ -1,6 +1,3 @@
-import os
-from datetime import date
-
 from peewee import (
     CharField,
     DateField,
@@ -55,5 +52,5 @@ WorshipArrangement = Worship.arrangements.get_through_model()
 
 def init(db_uri: str):
     """Initialize the database with `db_uri`."""
-    _db.init(db_uri)
+    _db.init(db_uri)  # TODO: Add path validation.
     _db.create_tables([Song, Arrangement, Worship, WorshipSong, WorshipArrangement])
