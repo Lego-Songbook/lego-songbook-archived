@@ -192,14 +192,6 @@ pyparsing = ">=2.0.2"
 six = "*"
 
 [[package]]
-category = "dev"
-description = "Utility library for gitignore style pattern matching of file paths."
-name = "pathspec"
-optional = false
-python-versions = ">=2.7, !=3.0.*, !=3.1.*, !=3.2.*, !=3.3.*"
-version = "0.6.0"
-
-[[package]]
 category = "main"
 description = "a little orm"
 name = "peewee"
@@ -413,18 +405,6 @@ version = "1.3.0"
 
 [[package]]
 category = "dev"
-description = "A linter for YAML files."
-name = "yamllint"
-optional = false
-python-versions = ">=2.7, !=3.0.*, !=3.1.*, !=3.2.*, !=3.3.*"
-version = "1.18.0"
-
-[package.dependencies]
-pathspec = ">=0.5.3"
-pyyaml = "*"
-
-[[package]]
-category = "dev"
 description = "Backport of pathlib-compatible object wrapper for zip files"
 marker = "python_version < \"3.8\""
 name = "zipp"
@@ -440,7 +420,7 @@ docs = ["sphinx", "jaraco.packaging (>=3.2)", "rst.linker (>=1.9)"]
 testing = ["pathlib2", "contextlib2", "unittest2"]
 
 [metadata]
-content-hash = "d13c6dc6e6d1af1cfeed044786335a16bf2686626fe1cf3ecb7de2a08db70721"
+content-hash = "a5727dc28d8ebf4aeaf372c6ab627733fcf4707c9c355438eaeba3303dbca622"
 python-versions = "^3.6"
 
 [metadata.hashes]
@@ -463,7 +443,6 @@ more-itertools = ["409cd48d4db7052af495b09dec721011634af3753ae1ef92d2b32f73a745f
 odfpy = ["596021f0519623ca8717331951c95e3b8d7b21e86edc7efe8cb650a0d0f59a2b", "863746b87121d9e4017c32b6c318f7229a588f189c122a9613116c55a47e276d"]
 openpyxl = ["626d38647c063d55803ef4971c4d43226538d4e95cb6260c094e363ee33e10c7"]
 packaging = ["28b924174df7a2fa32c1953825ff29c61e2f5e082343165438812f00d3a7fc47", "d9551545c6d761f3def1677baf08ab2a3ca17c56879e70fecba2fc4dde4ed108"]
-pathspec = ["e285ccc8b0785beadd4c18e5708b12bb8fcf529a1e61215b3feff1d1e559ea5c"]
 peewee = ["f3f5c80c51b632d031f60454accadd84f166453a471bff63093ca674973f2a4e"]
 pluggy = ["0db4b7601aae1d35b4a033282da476845aa19185c1e6964b25cf324b5e4ec3e6", "fa5fa1622fa6dd5c030e9cad086fa19ef6a0cf6d7a2d12318e10cb49d6d68f34"]
 py = ["64f65755aee5b381cea27766a3a147c3f15b9b6b9ac88676de66ba2ae36793fa", "dc639b046a6e2cff5bbe40194ad65936d6ba360b52b3c3fe1d08a82dd50b5e53"]
@@ -480,5 +459,4 @@ virtualenv = ["11cb4608930d5fd3afb545ecf8db83fa50e1f96fc4fca80c94b07d2c83146589"
 wcwidth = ["3df37372226d6e63e1b1e1eda15c594bca98a22d33a23832a90998faa96bc65e", "f4ebe71925af7b40a864553f761ed559b43544f8f71746c2d756c7fe788ade7c"]
 xlrd = ["546eb36cee8db40c3eaa46c351e67ffee6eeb5fa2650b71bc4c758a29a1b29b2", "e551fb498759fa3a5384a94ccd4c3c02eb7c00ea424426e212ac0c57be9dfbde"]
 xlwt = ["a082260524678ba48a297d922cc385f58278b8aa68741596a87de01a9c628b2e", "c59912717a9b28f1a3c2a98fd60741014b06b043936dcecbc113eaaada156c88"]
-yamllint = ["24f05b7ff1a604120eeb5ff7afb7ed8792253bfa96ee83db9cec6d5c20feaf64", "d42dbb35b3d28722a8c5c25de4593add0a6215b2732eb6932d89f38482c3d01c"]
 zipp = ["3718b1cbcd963c7d4c5511a8240812904164b7f381b647143a89d3b98f9bcd8e", "f06903e9f1f43b12d371004b4ac7b06ab39a44adc747266928ae6debfa7b3335"]
