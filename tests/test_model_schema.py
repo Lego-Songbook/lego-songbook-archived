@@ -17,12 +17,15 @@ def test_tables_exist():
 
 
 def test_hymn_fields():
-    """Hymn table has 2 fields, `id` and `name`."""
+    """`Hymn` table has 2 fields, `id` and `name`."""
     hymn = models.Hymn.create(name="Song A", id=1)
     assert hymn.id == 1
 
 
 def test_hymn_id():
+    """The `id` column of `Hymn` does not represent row id's, so they
+    do not need to be in sequential order.
+    """
     hymn_3 = models.Hymn.create(name="Hymn 3", id=3)
     hymn_2 = models.Hymn.create(name="Hymn 2", id=2)
     assert hymn_2.id == 2
@@ -30,7 +33,7 @@ def test_hymn_id():
 
 
 def test_song_fields():
-    """`song` table has 3 fields: `name`, `key`, and `hymn_ref`."""
+    """`Song` table has 3 fields: `name`, `key`, and `hymn_ref`."""
     song = models.Song.create(name="Song A", key="C", hymn=1)
     assert song.hymn.id == 1
 
