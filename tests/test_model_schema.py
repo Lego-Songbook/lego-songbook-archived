@@ -16,10 +16,23 @@ def test_tables_exist():
     assert models._db.table_exists("worship_arrangement_through")
 
 
-def test_song_field():
+def test_hymn_fields():
+    """Hymn table has 2 fields, `id` and `name`."""
+    hymn = models.Hymn.create(name="Song A", id=1)
+    assert hymn.id == 1
+
+
+def test_hymn_id():
+    hymn_3 = models.Hymn.create(name="Hymn 3", id=3)
+    hymn_2 = models.Hymn.create(name="Hymn 2", id=2)
+    assert hymn_2.id == 2
+    assert hymn_3.id == 3
+
+
+def test_song_fields():
     """`song` table has 3 fields: `name`, `key`, and `hymn_ref`."""
-    song = models.Song.create(name="Song A", key="C", hymn_ref=123)
-    assert song.hymn_ref == 123
+    song = models.Song.create(name="Song A", key="C", hymn=1)
+    assert song.hymn.id == 1
 
 
 def test_song_name_uniqueness():
@@ -31,7 +44,7 @@ def test_song_name_uniqueness():
 def test_song_hymn_ref_nullability():
     """The `hymn_ref` field is nullable."""
     song = models.Song.create(name="Song B", key="Ab")
-    assert song.hymn_ref is None
+    assert song.hymn is None
 
 
 def test_arrangement_field():
