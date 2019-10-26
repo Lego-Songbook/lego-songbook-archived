@@ -2,7 +2,7 @@ from invoke import task
 
 
 @task
-def format(c):
+def lint(c):
     """Sort the imports and do the black magic."""
     c.run("poetry run isort -rc .")
     c.run("poetry run black .")
@@ -13,6 +13,12 @@ def serve(c):
     """Start the local site server."""
     c.run("cd docs", hide=True)
     c.run("bundle exec jekyll serve")
+
+
+@task
+def test(c):
+    """Run tox tests."""
+    c.run("poetry run tox")
 
 
 @task(help={"name": "The feature's name."})
