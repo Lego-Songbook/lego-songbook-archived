@@ -41,9 +41,9 @@ def add_songs(songs: Sequence[Tuple[str, str, int]]) -> bool:
 
     with db.atomic():
         Song.insert_many(
-            songs, fields=[Song.name, Song.key, Song.hymn_ref]
+            songs, fields=[Song.name, Song.key, Song.hymn]
         ).on_conflict(
-            conflict_target=[Song.name], preserve=[Song.key, Song.hymn_ref]
+            conflict_target=[Song.name], preserve=[Song.key, Song.hymn]
         ).execute()
 
 
