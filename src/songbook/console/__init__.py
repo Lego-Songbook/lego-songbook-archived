@@ -34,6 +34,7 @@ import click
 from .. import models
 from ._import import import_  # lol
 from ._view import view
+from ._add import add
 
 
 @click.group()
@@ -43,3 +44,4 @@ def main():
 
 main.add_command(import_)
 main.add_command(view)
+main.add_command(add)

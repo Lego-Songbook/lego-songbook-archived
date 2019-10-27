@@ -1,14 +1,14 @@
 import click
 
-from .. import models
+from ..models import Song
 
 
 def _view_songs(limit: int, key: str, name: str):
-    query = models.Song.select()
+    query = Song.select()
     if key:
-        query = query.where(models.Song.key == key)
+        query = query.where(Song.key == key)
     if name:
-        query = query.where(models.Song.name.contains(name))
+        query = query.where(Song.name.contains(name))
     if limit:
         query = query.limit(limit)
     for song in query:
