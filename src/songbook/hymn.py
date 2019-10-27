@@ -12,7 +12,7 @@ def get(site=_SITE, output="db/csv/hymn.csv"):
 
     hymn_data = [song.span.string.split(".") for song in soup.find_all("li")]
 
-    hymn = tablib.Dataset(headers=["id", "name"])
+    hymn = tablib.Dataset(headers=["index", "name"])
 
     for song in hymn_data:
         hymn.append([int(song[0]), song[1]])
