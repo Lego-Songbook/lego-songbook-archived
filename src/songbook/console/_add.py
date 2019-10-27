@@ -34,6 +34,6 @@ def _add_arrangement(name, role):
 @add.command("worship")
 @click.option("--arrangements")
 @click.option("--songs")
-def _add_worship(date, arrangements, songs):
+def _add_worship(date, arrangements, songs):  # TODO: How to add worships via a cli?
     if date is None:
         raise ValueError("Must specify the date of the worship!")

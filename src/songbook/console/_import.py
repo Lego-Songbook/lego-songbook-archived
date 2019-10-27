@@ -26,8 +26,8 @@ def import_():
     pass
 
 
-# Importing songs from a dir seems like a one-off effort.
-# Maybe I should just remove this for the sake of simplicity.
+# TODO: Importing songs from a dir seems like a one-off effort.
+# TODO: Maybe I should just remove this for the sake of simplicity.
 @import_.command("song")
 @click.option("-i", "--input", "input_", required=True)
 @click.option("-d", "--delimiter", default="-")
