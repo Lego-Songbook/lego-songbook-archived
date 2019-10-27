@@ -4,8 +4,7 @@ from pathlib import Path
 import click
 import tablib
 
-from ..models import Song, Arrangement, Worship, Hymn
-
+from ..models import Arrangement, Hymn, Song, Worship
 
 _MODEL_NAMES = {
     "song": Song,
@@ -41,7 +40,7 @@ def _import_song(input_, delimiter, fields, conflict_action):
             song_data.append(sheet_file.name.split(delimiter)[: len(fields)])
         return (
             Song.insert_many(song_data, fields=(Song.key, Song.name))  # TODO: Use str
-                .on_conflict(
+            .on_conflict(
                 action=conflict_action,
                 conflict_target=[Song.name],
                 preserve=[Song.name],

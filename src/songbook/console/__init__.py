@@ -32,9 +32,9 @@ import os
 import click
 
 from .. import models
+from ._add import add
 from ._import import import_  # lol
 from ._view import view
-from ._add import add
 
 
 @click.group()

@@ -2,7 +2,7 @@ import datetime
 
 import click
 
-from ..models import Song, Arrangement, Worship
+from ..models import Arrangement, Song, Worship
 
 
 @click.group("add")
@@ -42,8 +42,9 @@ def _add_arrangement(name, role):
 @click.option("-a", "--arrangements", nargs=2, multiple=True)
 @click.option("-s", "--songs", multiple=True)
 def _add_worship(date, arrangements, songs):  # TODO: How to add worships via a cli?
-    arrangement_data = [Arrangement.get_or_create(role=arr[0],  name=arr[1])[0] for arr
-                        in arrangements]
+    arrangement_data = [
+        Arrangement.get_or_create(role=arr[0], name=arr[1])[0] for arr in arrangements
+    ]
     print(arrangement_data)
     song_data = [Song.get_or_create(name=song)[0] for song in songs]
     print(song_data)

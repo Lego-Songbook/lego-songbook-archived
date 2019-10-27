@@ -1,6 +1,6 @@
 import click
 
-from ..models import Song, Arrangement, Worship, Hymn
+from ..models import Arrangement, Hymn, Song, Worship
 
 
 @click.group("view")
