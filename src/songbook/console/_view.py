@@ -1,6 +1,6 @@
 import click
 
-from ..models import Song, Arrangement, Worship
+from ..models import Song, Arrangement, Worship, Hymn
 
 
 @click.group("view")
@@ -36,3 +36,17 @@ def _view_worship():
     query = Worship.select().execute()
     for worship in query:
         print(repr(worship))
+
+
+@view.command("hymn")
+@click.option("-n", "--name")
+@click.option("-i", "--index", type=int)
+def _view_hymn(name, index):
+    query = Hymn.select()
+    if name is not None:
+        query = query.where(Hymn.name.contains(name))
+    if index is not None:
+        query = query.where(Hymn.index == index)
+    query = query.execute()
+    for hymn in query:
+        print(repr(hymn))
