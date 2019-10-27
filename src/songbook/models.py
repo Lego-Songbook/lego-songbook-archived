@@ -8,7 +8,7 @@ from peewee import (
     SqliteDatabase,
 )
 
-__all__ = ("Song", "Arrangement", "Worship", "init")
+__all__ = ("Song", "Arrangement", "Worship", "Hymn", "init")
 
 _db = SqliteDatabase(None)
 

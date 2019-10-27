@@ -1,69 +1,62 @@
 import os
+from pathlib import Path
 
 import click
+import tablib
 
-from .. import models
+from ..models import Song, Arrangement, Worship, Hymn
 
 
-def _import_songs_from_folder(input_, delimiter, fields, conflict_action):
+_MODEL_NAMES = {
+    "song": Song,
+    "arrangement": Arrangement,
+    "arr": Arrangement,
+    "worship": Worship,
+    "hymn": Hymn,
+}
+
+
+def _import_songs_from_folder(input_, delimiter, fields, conflict_action) -> int:
     song_data = []
     for sheet_file in os.scandir(input_):
         song_data.append(sheet_file.name.split(delimiter)[: len(fields)])
     return (
-        models.Song.insert_many(song_data, fields=(models.Song.key, models.Song.name))
+        Song.insert_many(song_data, fields=(Song.key, Song.name))  # TODO: Use str
         .on_conflict(
             action=conflict_action,
-            conflict_target=[models.Song.name],
-            preserve=[models.Song.name],
+            conflict_target=[Song.name],
+            preserve=[Song.name],
         )
         .execute()
     )
 
 
-def _import_songs_from_file(input_, format_):
-    pass
-
-
-def _import_songs(input_, format_, delimiter, fields, conflict_action):
-    if format_ == "folder":
-        _import_songs_from_folder(
-            input_=input_,
-            delimiter=delimiter,
-            fields=fields,
-            conflict_action=conflict_action,
-        )
-    else:
-        _import_songs_from_file(input_, format_)
-
-
-def _import_arrangements():
-    pass
-
-
-def _import_worships():
-    pass
+def _import_from_file(table, input_) -> int:
+    model = _MODEL_NAMES[table]
+    data = tablib.Dataset().load(open(input_, "r").read())
+    return model.insert_many(data.dict).execute()
 
 
 @click.command("import")
 @click.argument("table")
-@click.option("-f", "--format", "format_")
 @click.option("-i", "--input", "input_")
 @click.option("-d", "--delimiter", default="-")
-@click.option("--fields", default=(models.Song.key, models.Song.name))
+@click.option("--fields", default=(Song.key, Song.name))
 @click.option("--update", "conflict_action", flag_value="update", default=True)
 @click.option("--ignore", "conflict_action", flag_value="ignore")
-def import_(table, format_, input_, delimiter, fields, conflict_action):
-    if table == "songs":
-        _import_songs(
+def import_(table, input_, delimiter, fields, conflict_action):
+    if table not in _MODEL_NAMES.keys():
+        raise ValueError(f"Invalid table name: {table}.")
+    if input_ is None:
+        raise ValueError("Must specify a directory or a path to import via `--input`.")
+    elif table == "song" and input_ is not None and Path(input_).is_dir():
+        result = _import_songs_from_folder(
             input_=input_,
-            format_=format_,
             delimiter=delimiter,
             fields=fields,
             conflict_action=conflict_action,
         )
-    elif table == "arrangements":
-        _import_arrangements()
-    elif table == "worships":
-        _import_worships()
     else:
-        raise ValueError(f"Invalid table name {table}.")
+        return _import_from_file(table=table, input_=input_)
+
+    print(result)
