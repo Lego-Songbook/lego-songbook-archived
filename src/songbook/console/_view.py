@@ -1,6 +1,6 @@
 import click
 
-from ..models import Song
+from ..models import Song, Arrangement, Worship
 
 
 @click.group("view")
@@ -22,3 +22,17 @@ def _view_song(limit, key, name):
         query = query.limit(limit)
     for song_ in query:
         print(repr(song_))
+
+
+@view.command("arrangement")
+def _view_arrangement():
+    query = Arrangement.select().execute()
+    for arr in query:
+        print(repr(arr))
+
+
+@view.command("worship")
+def _view_worship():
+    query = Worship.select().execute()
+    for worship in query:
+        print(repr(worship))
