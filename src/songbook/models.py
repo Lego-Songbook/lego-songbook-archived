@@ -1,14 +1,14 @@
 from peewee import (
     CharField,
     DateField,
+    ForeignKeyField,
     IntegerField,
     ManyToManyField,
     Model,
     SqliteDatabase,
-    ForeignKeyField
 )
 
-__all__ = ("Song", "Arrangement", "Worship", "init")
+__all__ = ("Song", "Arrangement", "Worship", "Hymn", "init")
 
 _db = SqliteDatabase(None)
 
@@ -21,9 +21,8 @@ class _BaseModel(Model):
 class Hymn(Model):
     class Meta:
         database = _db
-        without_rowid = True
 
-    id = IntegerField(primary_key=True, column_name="id")
+    index = IntegerField(primary_key=True)
     name = CharField()
 
 
@@ -63,5 +62,6 @@ WorshipArrangement = Worship.arrangements.get_through_model()
 def init(db_uri: str):
     """Initialize the database with `db_uri`."""
     _db.init(db_uri)  # TODO: Add path validation.
-    _db.create_tables([Hymn, Song, Arrangement, Worship, WorshipSong,
-                       WorshipArrangement])
+    _db.create_tables(
+        [Hymn, Song, Arrangement, Worship, WorshipSong, WorshipArrangement]
+    )
