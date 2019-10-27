@@ -9,29 +9,34 @@ def add():
 
 
 @add.command("song")
-@click.option("--name")
-@click.option("--key")
-@click.option("--hymn")
+@click.option("-n", "--name", required=True)
+@click.option("-k", "--key")
+@click.option("-h", "--hymn")
 def _add_song(name, key, hymn):
-    if name is None or key is None:
-        raise ValueError("Must specify the name and the key of the song!")
-    song = Song.create(name=name, key=key)
+    print(f"Name: {name}, Key: {key}, Hymn No.: {hymn}.")
+    song = Song.create(name=name)
+    if key is not None:
+        song.key = key
     if hymn is not None:
         song.hymn = hymn
+    print(repr(song))
     song.save()
     return song
 
 
 @add.command("arrangement")
-@click.option("--name")
-@click.option("--role")
+@click.option("--name", required=True)
+@click.option("--role", required=True)
 def _add_arrangement(name, role):
-    if name is None or role is None:
-        raise ValueError("Must specify the name and the role of the arrangement!")
     return Arrangement.create(name=name, role=role)
 
 
+# Ways to add worships via a cliL
+# 1. Use the id of songs & worships.
+# 2. "get_or_create()".
+# 3. songbook add worship -a "Keyboard, Adam" -a "Drums, Bella" -s "Song A" -s "Song B"
 @add.command("worship")
+@click.option("--date", required=True)
 @click.option("--arrangements")
 @click.option("--songs")
 def _add_worship(date, arrangements, songs):  # TODO: How to add worships via a cli?
