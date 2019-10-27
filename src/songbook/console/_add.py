@@ -1,6 +1,8 @@
+import datetime
+
 import click
 
-from ..models import Song, Arrangement
+from ..models import Song, Arrangement, Worship
 
 
 @click.group("add")
@@ -25,8 +27,8 @@ def _add_song(name, key, hymn):
 
 
 @add.command("arrangement")
-@click.option("--name", required=True)
-@click.option("--role", required=True)
+@click.option("-n", "--name", required=True)
+@click.option("-r", "--role", required=True)
 def _add_arrangement(name, role):
     return Arrangement.create(name=name, role=role)
 
@@ -36,9 +38,16 @@ def _add_arrangement(name, role):
 # 2. "get_or_create()".
 # 3. songbook add worship -a "Keyboard, Adam" -a "Drums, Bella" -s "Song A" -s "Song B"
 @add.command("worship")
-@click.option("--date", required=True)
-@click.option("--arrangements")
-@click.option("--songs")
+@click.option("-d", "--date", required=True)
+@click.option("-a", "--arrangements", nargs=2, multiple=True)
+@click.option("-s", "--songs", multiple=True)
 def _add_worship(date, arrangements, songs):  # TODO: How to add worships via a cli?
-    if date is None:
-        raise ValueError("Must specify the date of the worship!")
+    arrangement_data = [Arrangement.get_or_create(role=arr[0],  name=arr[1])[0] for arr
+                        in arrangements]
+    print(arrangement_data)
+    song_data = [Song.get_or_create(name=song)[0] for song in songs]
+    print(song_data)
+    worship = Worship.create(date=datetime.date.fromisoformat(date))
+    worship.arrangements.add(arrangement_data)
+    worship.songs.add(song_data)
+    print(repr(worship))
