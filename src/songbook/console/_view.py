@@ -3,7 +3,16 @@ import click
 from ..models import Song
 
 
-def _view_songs(limit: int, key: str, name: str):
+@click.group("view")
+def view():
+    pass
+
+
+@view.command("song")
+@click.option("-l", "--limit", type=int, default=None)
+@click.option("-k", "--key", type=str, default=None)
+@click.option("-n", "--name", type=str, default=None)
+def _view_song(limit, key, name):
     query = Song.select()
     if key:
         query = query.where(Song.key == key)
@@ -11,15 +20,5 @@ def _view_songs(limit: int, key: str, name: str):
         query = query.where(Song.name.contains(name))
     if limit:
         query = query.limit(limit)
-    for song in query:
-        print(repr(song))
-
-
-@click.command("view")
-@click.argument("table")
-@click.option("-l", "--limit", type=int, default=None)
-@click.option("-k", "--key", type=str, default=None)
-@click.option("-n", "--name", type=str, default=None)
-def view(table, limit, key, name):
-    if table == "songs":
-        _view_songs(limit=limit, key=key, name=name)
+    for song_ in query:
+        print(repr(song_))

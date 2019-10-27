@@ -3,6 +3,15 @@ import click
 from ..models import Song, Arrangement
 
 
+@click.group("add")
+def add():
+    pass
+
+
+@add.command("song")
+@click.option("--name")
+@click.option("--key")
+@click.option("--hymn")
 def _add_song(name, key, hymn):
     if name is None or key is None:
         raise ValueError("Must specify the name and the key of the song!")
@@ -13,25 +22,18 @@ def _add_song(name, key, hymn):
     return song
 
 
+@add.command("arrangement")
+@click.option("--name")
+@click.option("--role")
 def _add_arrangement(name, role):
     if name is None or role is None:
         raise ValueError("Must specify the name and the role of the arrangement!")
     return Arrangement.create(name=name, role=role)
 
 
-def _add_worship(date, arrangement, songs):
+@add.command("worship")
+@click.option("--arrangements")
+@click.option("--songs")
+def _add_worship(date, arrangements, songs):
     if date is None:
         raise ValueError("Must specify the date of the worship!")
-
-
-@click.command("add")
-@click.argument("table")
-@click.option("--name")
-@click.option("--key")
-@click.option("--hymn")
-@click.option("--role")
-def add(table, name, key, hymn, role):
-    if table == "song":
-        return _add_song(name=name, key=key, hymn=hymn)
-    elif table == "arrangement":
-        return _add_arrangement(name=name, role=role)
