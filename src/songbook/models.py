@@ -29,7 +29,7 @@ class Hymn(Model):
 class Song(_BaseModel):
 
     name = CharField(unique=True)
-    key = CharField()
+    key = CharField(null=True)
     hymn = ForeignKeyField(Hymn, null=True)
 
     def __repr__(self):
