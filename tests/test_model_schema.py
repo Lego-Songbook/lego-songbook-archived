@@ -22,7 +22,7 @@ def test_hymn_fields():
     assert hymn.index == 1
 
 
-def test_hymn_id():
+def test_hymn_index():
     """The `id` column of `Hymn` does not represent row id's, so they
     do not need to be in sequential order.
     """
@@ -33,9 +33,9 @@ def test_hymn_id():
 
 
 def test_song_fields():
-    """`Song` table has 3 fields: `name`, `key`, and `hymn_ref`."""
+    """`Song` table has 3 fields: `name`, `key`, and `hymn`."""
     song = models.Song.create(name="Song A", key="C", hymn=1)
-    assert song.hymn.id == 1
+    assert song.hymn.index == 1
 
 
 def test_song_name_uniqueness():
