@@ -33,7 +33,13 @@ import click
 
 from .. import models
 from ._add import add
+from ._config import config
+from ._export import export
 from ._import import import_  # lol
+from ._init import init
+from ._remove import remove
+from ._sync import sync
+from ._update import update
 from ._view import view
 
 
@@ -42,6 +48,12 @@ def main():
     models.init(os.environ.get("SONGBOOK_DB", "db/songbook.db"))
 
 
-main.add_command(import_)
-main.add_command(view)
 main.add_command(add)
+main.add_command(config)
+main.add_command(export)
+main.add_command(import_)
+main.add_command(init)
+main.add_command(remove)
+main.add_command(sync)
+main.add_command(update)
+main.add_command(view)
