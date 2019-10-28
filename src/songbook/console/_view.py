@@ -32,8 +32,15 @@ def _view_arrangement():
 
 
 @view.command("worship")
-def _view_worship():
-    query = Worship.select().execute()
+@click.option("-d", "--date")
+@click.option("-r", "--recent", type=int)
+def _view_worship(date, recent):
+    query = Worship.select()
+    if date is not None:
+        query = query.where(Worship.date == date)
+    if recent is not None:
+        query = query.order_by(Worship.date.desc()).limit(recent)
+    query = query.execute()
     for worship in query:
         print(repr(worship))
 
