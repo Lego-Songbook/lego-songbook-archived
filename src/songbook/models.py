@@ -17,18 +17,21 @@ class _BaseModel(Model):
     class Meta:
         database = _db
 
+    def __repr__(self):
+        data: dict = self.__data__
+        fields: list = sorted(list(self._meta.fields.keys()))
+        table: str = self._meta.table_name.title()
+        field_values = [f"{field}={data.get(field, 'None')}" for field in fields]
+        return f"{table}({', '.join(field_values)})"
 
-class Hymn(Model):
-    class Meta:
-        database = _db
+    __str__ = __repr__
+
+
+class Hymn(_BaseModel):
 
     index = IntegerField(primary_key=True)
     name = CharField()
-
-    def __repr__(self):
-        return f"Hymn(index={self.index}, name={self.name})"
-
-    __str__ = __repr__
+    key = CharField()
 
 
 class Song(_BaseModel):
@@ -37,21 +40,11 @@ class Song(_BaseModel):
     key = CharField(null=True)
     hymn = ForeignKeyField(Hymn, null=True)
 
-    def __repr__(self):
-        return f"Song(id={self.id}, name={self.name}, key={self.key}, hymn={self.hymn})"
-
-    __str__ = __repr__
-
 
 class Arrangement(_BaseModel):
 
     name = CharField()
     role = CharField()
-
-    def __repr__(self):
-        return f"Arrangement(id={self.id}, role={self.role}, name={self.name})"
-
-    __str__ = __repr__
 
 
 class Worship(_BaseModel):
@@ -59,11 +52,6 @@ class Worship(_BaseModel):
     date = DateField()
     songs = ManyToManyField(Song)
     arrangements = ManyToManyField(Arrangement)
-
-    def __repr__(self):
-        return f"Worship(id={self.id}, date={self.date}, songs={[song for song in self.songs]}, arrangements={[arr for arr in self.arrangements]})"
-
-    __str__ = __repr__
 
 
 WorshipSong = Worship.songs.get_through_model()
