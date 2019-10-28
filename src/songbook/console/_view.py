@@ -25,8 +25,29 @@ def _view_song(limit, key, name):
 
 
 @view.command("arrangement")
-def _view_arrangement():
-    query = Arrangement.select().execute()
+@click.option("-n", "--name")
+@click.option("-r", "--role")
+@click.option("-o", "--order-by", "order_by")
+@click.option("-a", "--asc", "order", flag_value="asc", default=True)
+@click.option("-d", "--desc", "order", flag_value="desc")
+def _view_arrangement(name, role, order_by, order):
+    query = Arrangement.select()
+    if name is not None:
+        query = query.where(Arrangement.name == name)
+    if role is not None:
+        query = query.where(Arrangement.role == role)
+
+    column_map = {
+        "name": Arrangement.name,
+        "role": Arrangement.role,
+    }
+    if order_by in column_map.keys():  # TODO: do we actually need this?
+        if order == "asc":
+            query = query.order_by(column_map[order_by])
+        else:
+            query = query.order_by(column_map[order_by].desc())
+    query = query.execute()
+
     for arr in query:
         print(repr(arr))
 
