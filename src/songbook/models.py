@@ -10,7 +10,15 @@ from peewee import (
     SqliteDatabase,
 )
 
-__all__ = ("Song", "Arrangement", "Worship", "Hymn", "init")
+__all__ = (
+    "Song",
+    "Arrangement",
+    "Worship",
+    "Hymn",
+    "init",
+    "WorshipArrangement",
+    "WorshipSong",
+)
 
 _db = SqliteDatabase(None)
 
@@ -33,9 +41,9 @@ class _BaseModel(Model):
 
 class Hymn(_BaseModel):
 
-    index = IntegerField(primary_key=True)
+    id = IntegerField(primary_key=True)
     name = CharField()
-    # key = CharField(null=True)
+    key = CharField(null=True)
 
 
 class Song(_BaseModel):
