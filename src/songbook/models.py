@@ -35,7 +35,7 @@ class Hymn(_BaseModel):
 
     index = IntegerField(primary_key=True)
     name = CharField()
-    key = CharField(null=True)
+    # key = CharField(null=True)
 
 
 class Song(_BaseModel):
