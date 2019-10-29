@@ -71,7 +71,7 @@ def _view_hymn(name, index):
     if name is not None:
         query = query.where(Hymn.name.contains(name))
     if index is not None:
-        query = query.where(Hymn.index == index)
+        query = query.where(Hymn.id == index)
     query = query.execute()
     for hymn in query:
         print(repr(hymn))

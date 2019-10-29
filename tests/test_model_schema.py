@@ -18,24 +18,24 @@ def test_tables_exist():
 
 def test_hymn_fields():
     """`Hymn` table has 2 fields, `id` and `name`."""
-    hymn = models.Hymn.create(name="Song A", index=1)
-    assert hymn.index == 1
+    hymn = models.Hymn.create(name="Song A", id=1)
+    assert hymn.id == 1
 
 
 def test_hymn_index():
     """The `id` column of `Hymn` does not represent row id's, so they
     do not need to be in sequential order.
     """
-    hymn_3 = models.Hymn.create(name="Hymn 3", index=3)
-    hymn_2 = models.Hymn.create(name="Hymn 2", index=2)
-    assert hymn_2.index == 2
-    assert hymn_3.index == 3
+    hymn_3 = models.Hymn.create(name="Hymn 3", id=3)
+    hymn_2 = models.Hymn.create(name="Hymn 2", id=2)
+    assert hymn_2.id == 2
+    assert hymn_3.id == 3
 
 
 def test_song_fields():
     """`Song` table has 3 fields: `name`, `key`, and `hymn`."""
-    song = models.Song.create(name="Song A", key="C", hymn=1)
-    assert song.hymn.index == 1
+    song = models.Song.create(name="Song A", key="C", hymn_id=1)
+    assert song.hymn.id == 1
 
 
 def test_song_name_uniqueness():

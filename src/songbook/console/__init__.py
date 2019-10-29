@@ -45,7 +45,7 @@ from ._view import view
 
 @click.group()
 def main():
-    models.init(os.environ.get("SONGBOOK_DB", "db/songbook.db"))
+    models.init(os.environ.get("SONGBOOK_DB", "data/songbook.db"))
 
 
 main.add_command(add)
