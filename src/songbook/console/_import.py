@@ -16,7 +16,7 @@ _MODEL_NAMES = {
 
 def _import_from_file(table, input_) -> int:
     model = _MODEL_NAMES[table]
-    data = tablib.Dataset().load(open(input_, "r").read())
+    data = tablib.Dataset().load(open(input_, "r", encoding="utf-8").read())
     return model.insert_many(data.dict).execute()
 
 
