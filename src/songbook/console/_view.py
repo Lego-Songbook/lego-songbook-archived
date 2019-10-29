@@ -33,11 +33,11 @@ def _view_song(limit, key, name):
 def _view_arrangement(name, role, order_by, order):
     query = Arrangement.select()
     if name is not None:
-        query = query.where(Arrangement.name == name)
+        query = query.where(Arrangement.person == name)
     if role is not None:
         query = query.where(Arrangement.role == role)
 
-    column_map = {"name": Arrangement.name, "role": Arrangement.role}
+    column_map = {"name": Arrangement.person, "role": Arrangement.role}
     if order_by in column_map.keys():  # TODO: do we actually need this?
         if order == "asc":
             query = query.order_by(column_map[order_by])

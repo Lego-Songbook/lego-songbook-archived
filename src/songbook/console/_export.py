@@ -38,7 +38,7 @@ def _export_arrangement(output):
         Arrangement,
         output,
         id=Arrangement.id,
-        name=Arrangement.name,
+        name=Arrangement.person,
         role=Arrangement.role,
     )
 
@@ -47,7 +47,6 @@ def _export_arrangement(output):
 @click.option("-o", "--output")
 def _export_worship(output):
     _export(Worship, output, id=Worship.id, date=Worship.date)
-    _export(WorshipArrangement)
 
 
 @export.command("hymn")
