@@ -1,4 +1,4 @@
-from typing import List, Dict, Any
+from typing import Any, Dict, List
 
 from peewee import (
     CharField,
@@ -23,7 +23,9 @@ class _BaseModel(Model):
         data: Dict[str, Any] = self.__data__
         fields: List[str] = sorted(list(self._meta.fields.keys()))
         table: str = self._meta.table_name.title()
-        field_values: List[str] = [f"{field}={data.get(field, 'None')}" for field in fields]
+        field_values: List[str] = [
+            f"{field}={data.get(field, 'None')}" for field in fields
+        ]
         return f"{table}({', '.join(field_values)})"
 
     __str__ = __repr__
