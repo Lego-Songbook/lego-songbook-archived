@@ -1,14 +1,22 @@
 from pathlib import Path
 
-
 import click
 import tablib
 
-from ..models import Song, Hymn, Worship, Arrangement
+from ..models import Arrangement, Hymn, Song, Worship
 
 
-def _export_table():
-    pass
+def _export(table, output, **kwargs):
+    dataset = tablib.Dataset()
+    dataset.headers = list(kwargs.keys())
+    query = table.select(*kwargs.values()).tuples()
+    for entry in query:
+        dataset.append(entry)
+    if output is not None:
+        out_file = Path(output)
+        out_file.write_text(dataset.export(out_file.suffix.strip(".")))
+    else:
+        print(dataset.export("csv"))
 
 
 @click.group()
@@ -19,13 +27,7 @@ def export():
 @export.command("song")
 @click.option("-o", "--output")
 def _export_song(output):
-    out_file = Path(output)
-    dataset = tablib.Dataset()
-    dataset.headers = ["id", "name", "key", "hymn"]
-    query = Song.select(Song.id, Song.name, Song.key, Song.hymn_id).tuples()
-    for entry in query:
-        dataset.append(entry)
-    out_file.write_text(dataset.export(out_file.suffix.strip(".")), encoding="utf-8", newline="\n")
+    _export(Song, output, id=Song.id, name=Song.name, key=Song.key, hymn=Song.hymn_id)
 
 
 @export.command("arrangement")
@@ -41,10 +43,4 @@ def _export_worship():
 @export.command("hymn")
 @click.option("-o", "--output")
 def _export_hymn(output):
-    out_file = Path(output)
-    dataset = tablib.Dataset()
-    dataset.headers = ["index", "name"]
-    query = Hymn.select(Hymn.index, Hymn.name).tuples()
-    for entry in query:
-        dataset.append(entry)
-    out_file.write_text(dataset.export(out_file.suffix.strip(".")))
+    _export(Hymn, output, index=Hymn.index, name=Hymn.name)
