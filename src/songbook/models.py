@@ -1,3 +1,5 @@
+from typing import List, Dict, Any
+
 from peewee import (
     CharField,
     DateField,
@@ -18,10 +20,10 @@ class _BaseModel(Model):
         database = _db
 
     def __repr__(self):
-        data: dict = self.__data__
-        fields: list = sorted(list(self._meta.fields.keys()))
+        data: Dict[str, Any] = self.__data__
+        fields: List[str] = sorted(list(self._meta.fields.keys()))
         table: str = self._meta.table_name.title()
-        field_values = [f"{field}={data.get(field, 'None')}" for field in fields]
+        field_values: List[str] = [f"{field}={data.get(field, 'None')}" for field in fields]
         return f"{table}({', '.join(field_values)})"
 
     __str__ = __repr__
@@ -31,7 +33,7 @@ class Hymn(_BaseModel):
 
     index = IntegerField(primary_key=True)
     name = CharField()
-    key = CharField()
+    key = CharField(null=True)
 
 
 class Song(_BaseModel):
