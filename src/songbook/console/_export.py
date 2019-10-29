@@ -12,7 +12,6 @@ def _export(table, output, **kwargs):
     query = table.select(*kwargs.values()).tuples()
     for entry in query:
         dataset.append(entry)
-
     if output is not None:
         out_file = Path(output)
         out_file.write_text(dataset.export(out_file.suffix.strip(".")))
@@ -52,4 +51,4 @@ def _export_worship(output):
 @export.command("hymn")
 @click.option("-o", "--output")
 def _export_hymn(output):
-    _export(Hymn, output, id=Hymn.id, name=Hymn.name, key=Hymn.key)
+    _export(Hymn, output, id=Hymn.id, name=Hymn.name, key_id=Hymn.key_id)
