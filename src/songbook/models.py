@@ -26,7 +26,24 @@ class _BaseModel(Model):
         ]
         return f"{table}({', '.join(field_values)})"
 
-    __str__ = __repr__
+    def __str__(self):
+        return self.__repr__()
+
+    @classmethod
+    def table_name(cls) -> str:
+        return cls._meta.table_name
+
+    @classmethod
+    def fields(cls) -> List[str]:
+        if cls._meta.fields is None:
+            return []
+        return list(cls._meta.fields.keys())
+
+    @classmethod
+    def data(cls) -> Dict[str, Any]:
+        if cls.__data__ is None:
+            return {}
+        return cls.__data__
 
 
 class Key(_BaseModel):
@@ -108,20 +125,21 @@ class WorshipArrangement(_BaseModel):
     arrangement = ForeignKeyField(Arrangement)
 
 
+TABLES = [
+    Artist,
+    Arrangement,
+    Hymn,
+    Key,
+    Person,
+    Role,
+    Song,
+    Worship,
+    WorshipSong,
+    WorshipArrangement,
+]
+
+
 def init(db_uri: str):
     """Initialize the database with `db_uri`."""
     db.init(db_uri)  # TODO: Add path validation.
-    db.create_tables(
-        [
-            Artist,
-            Arrangement,
-            Hymn,
-            Key,
-            Person,
-            Role,
-            Song,
-            Worship,
-            WorshipSong,
-            WorshipArrangement,
-        ]
-    )
+    db.create_tables(TABLES)
