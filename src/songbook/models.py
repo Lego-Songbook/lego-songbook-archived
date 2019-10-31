@@ -9,12 +9,12 @@ from peewee import (
     SqliteDatabase,
 )
 
-_db = SqliteDatabase(None)
+db = SqliteDatabase(None)
 
 
 class _BaseModel(Model):
     class Meta:
-        database = _db
+        database = db
         legacy_table_names = False
 
     def __repr__(self):
@@ -110,8 +110,8 @@ class WorshipArrangement(_BaseModel):
 
 def init(db_uri: str):
     """Initialize the database with `db_uri`."""
-    _db.init(db_uri)  # TODO: Add path validation.
-    _db.create_tables(
+    db.init(db_uri)  # TODO: Add path validation.
+    db.create_tables(
         [
             Artist,
             Arrangement,

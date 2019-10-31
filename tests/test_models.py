@@ -23,7 +23,7 @@ def test_tables_exist():
         "worship_arrangement",
     ]
     for table in tables:
-        assert models._db.table_exists(table)
+        assert models.db.table_exists(table)
 
 
 def test_key():
