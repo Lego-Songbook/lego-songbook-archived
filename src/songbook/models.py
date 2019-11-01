@@ -117,16 +117,16 @@ class WorshipArrangement(_BaseModel):
 
 
 TABLES = [
-    Artist,
     Arrangement,
+    Artist,
     Hymn,
     Key,
     Person,
     Role,
     Song,
     Worship,
-    WorshipSong,
     WorshipArrangement,
+    WorshipSong,
 ]
 
 
