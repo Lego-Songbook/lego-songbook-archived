@@ -132,7 +132,6 @@ TABLES = [
 
 def init(db_uri: str):
     """Initialize the database with `db_uri`."""
-    db.connect()
     db.init(
         db_uri,
         pragmas={
@@ -143,4 +142,5 @@ def init(db_uri: str):
             "synchronous": 0,
         },
     )  # TODO: Add path validation.
+    db.connect()
     db.create_tables(TABLES)
