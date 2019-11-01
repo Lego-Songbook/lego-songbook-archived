@@ -1,4 +1,4 @@
-from typing import Any, Dict, List
+from typing import Any, Dict, List, Tuple, Union
 
 from peewee import (
     CharField,
@@ -26,9 +26,6 @@ class _BaseModel(Model):
         ]
         return f"{table}({', '.join(field_values)})"
 
-    def __str__(self):
-        return self.__repr__()
-
     @classmethod
     def table_name(cls) -> str:
         return cls._meta.table_name
@@ -38,12 +35,6 @@ class _BaseModel(Model):
         if cls._meta.fields is None:
             return []
         return list(cls._meta.fields.keys())
-
-    @classmethod
-    def data(cls) -> Dict[str, Any]:
-        if cls.__data__ is None:
-            return {}
-        return cls.__data__
 
 
 class Key(_BaseModel):
