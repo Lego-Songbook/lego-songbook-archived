@@ -4,6 +4,7 @@ from typing import Sequence
 
 import tablib
 from peewee import Model
+
 from songbook import models
 
 

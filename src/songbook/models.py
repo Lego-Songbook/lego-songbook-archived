@@ -132,5 +132,15 @@ TABLES = [
 
 def init(db_uri: str):
     """Initialize the database with `db_uri`."""
-    db.init(db_uri)  # TODO: Add path validation.
+    db.connect()
+    db.init(
+        db_uri,
+        pragmas={
+            "journal_mode": "wal",
+            "cache_size": -1 * 64000,  # 64MB
+            "foreign_keys": 1,
+            "ignore_check_constraints": 0,
+            "synchronous": 0,
+        },
+    )  # TODO: Add path validation.
     db.create_tables(TABLES)
