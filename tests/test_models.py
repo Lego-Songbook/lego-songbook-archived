@@ -6,24 +6,25 @@ from peewee import IntegrityError
 from songbook import models
 from songbook.models import *
 
+tables = [
+    "artist",
+    "arrangement",
+    "hymn",
+    "key",
+    "person",
+    "role",
+    "song",
+    "worship",
+    "worship_song",
+    "worship_arrangement",
+]
 
-def test_tables_exist():
-    """Our database has five tables. They are created via `models.init()`."""
+
+@pytest.mark.parametrize("table", tables)
+def test_tables_exist(table):
+    """Our database has 10 tables. They are created via `models.init()`."""
     models.init(":memory:")
-    tables = [
-        "artist",
-        "arrangement",
-        "hymn",
-        "key",
-        "person",
-        "role",
-        "song",
-        "worship",
-        "worship_song",
-        "worship_arrangement",
-    ]
-    for table in tables:
-        assert models.db.table_exists(table)
+    assert models.db.table_exists(table)
 
 
 def test_key():
