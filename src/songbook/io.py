@@ -1,21 +1,29 @@
-"""Basic loading & dumping functions."""
+"""
+Basic loading & dumping functions.
+
+Dumping:
+
+    Database => In-Stream => `dump()` => Out-Stream => File/Stdout
+
+Loading:
+
+    File/Stdin => In-Stream => `load()` => Out-Stream => Database
+
+"""
+from io import StringIO
 from pathlib import Path
 from typing import Sequence
 
 import tablib
-from peewee import Model
 
-from songbook import models
+from songbook import models, types
 
 
-def _dump_table(table: Model, directory: Path, format_: str):
+def _dump_table(table: types.Model, directory: Path, format_: str):
     """Dump a single table."""
-    try:
-        table.select().tuples()
-        table.fields()
-        dataset = tablib.Dataset(*table.select().tuples(), headers=table.fields())
-    except:
-        print(table._meta.database.get_columns(table.table_name()))
+    table.select().tuples()
+    table.fields()
+    dataset = tablib.Dataset(*table.select().tuples(), headers=table.fields())
 
     if directory is not None:
         print(f"    Dumping {table.table_name()}...")
@@ -24,10 +32,22 @@ def _dump_table(table: Model, directory: Path, format_: str):
         print("    Done.")
         print("=====================")
     else:
-        print(dataset.export("csv"))
+        print(dataset.export(format_))
 
 
-def _load_table(table: Model, directory: Path, format_: str):
+def _dump(table: types.Model, format_: str) -> str:
+    table.select().tuples()
+    table.fields()
+    data = tablib.Dataset(*table.select().tuples(), headers=table.fields())
+    return data.export(format_)
+
+
+def _load(table: types.Model, in_stream: str, format_: str) -> int:
+    data = tablib.Dataset(headers=table.fields()).load(in_stream, format=format_)
+    return table.insert_many(data.dict).execute()
+
+
+def _load_table(table: types.Model, directory: Path, format_: str):
     """Dump a single table."""
 
     if directory is not None:
@@ -43,7 +63,7 @@ def _load_table(table: Model, directory: Path, format_: str):
         # print(dataset.export("csv"))
 
 
-def dump(tables: Sequence[Model] = None, directory: str = None):
+def dump(tables: Sequence[types.Model] = None, directory: str = None):
     """Dump the existing tables into csv files."""
     tables = tables or models.TABLES
 
@@ -57,7 +77,7 @@ def dump(tables: Sequence[Model] = None, directory: str = None):
         _dump_table(table=table, directory=directory, format_="csv")
 
 
-def load(tables: Sequence[Model] = None, directory: str = None):
+def load(tables: Sequence[types.Model] = None, directory: str = None):
     """Load the existing csv files to the database."""
     tables = tables or models.TABLES
     directory = Path(directory or "data/csv/").absolute()
@@ -68,8 +88,3 @@ def load(tables: Sequence[Model] = None, directory: str = None):
         print(f"{i+1}. Processing {table.table_name()}...")
         print(f"    Fields: {table.fields()}")
         _load_table(table=table, directory=directory, format_="csv")
-
-
-if __name__ == "__main__":
-    models.init("/Users/kip/projects/lego-songbook/data/songbook.db")
-    load(directory="/Users/kip/projects/lego-songbook/data/csv/")
