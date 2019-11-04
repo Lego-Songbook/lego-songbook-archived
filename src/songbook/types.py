@@ -1,10 +1,6 @@
-from typing import Union
+from typing import Type, Union
 
-from .models import *
-
-__all__ = ("Models",)
-
-Models = Union[
+from .models import (
     Arrangement,
     Artist,
     Hymn,
@@ -15,4 +11,21 @@ Models = Union[
     Worship,
     WorshipArrangement,
     WorshipSong,
+)
+
+__all__ = ("Model",)
+
+Model = Type[
+    Union[
+        Arrangement,
+        Artist,
+        Hymn,
+        Key,
+        Person,
+        Role,
+        Song,
+        Worship,
+        WorshipArrangement,
+        WorshipSong,
+    ]
 ]
