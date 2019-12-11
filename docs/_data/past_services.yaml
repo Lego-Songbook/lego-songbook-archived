@@ -76,3 +76,62 @@
       - 日日夜夜
       - 神羔羊配得
       - 能不能
+
+- date: 2019-11-17
+  lead_singer: 泽峰
+  instrumentation:
+      - instrument: 键盘
+        player: 淼姐
+  songs:
+      - 安静
+      - 再次将我更新
+      - 我的神我要敬拜你
+
+- date: 2019-11-24
+  lead_singer: 小凯
+  instrumentation:
+      - instrument: 键盘
+        player: 颐天
+      - instrument: 吉他
+        player: 泽峰
+  songs:
+      - 尽情地敬拜
+      - 再次将我更新
+      - 立定心志
+
+- date: 2019-12-1
+  lead_singer: 文清
+  instrumentation:
+      - instrument: 键盘
+        player: 翔哥
+  songs:
+      - 展开清晨的翅膀
+      - 我心切切渴慕你
+      - 你的爱不离不弃
+
+- date: 2019-12-8
+  lead_singer: 颐天
+  instrumentation:
+      - instrument: 键盘
+        player: 淼姐
+      - instrument: 吉他
+        player: 颐天
+  songs:
+      - 永恒的主
+      - 唯有耶稣
+      - 你是配得（圣哉圣哉全地唱）
+      - 何等恩典
+ 
+- date: 2019-12-15
+  lead_singer: 小凯
+  instrumentation:
+      - instrument: 键盘
+        player: 翔哥
+      - instrument: 吉他
+        player: 载恩
+      - instrument: 鼓
+        player: 颐天
+  songs:
+      - 充满在这里
+      - 你的爱
+      - 一粒麦子
